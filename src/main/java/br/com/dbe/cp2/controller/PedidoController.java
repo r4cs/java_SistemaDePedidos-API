@@ -3,6 +3,7 @@ package br.com.dbe.cp2.controller;
 import br.com.dbe.cp2.model.entity.pedido.DataPedido;
 import br.com.dbe.cp2.model.entity.pedido.Pedido;
 import br.com.dbe.cp2.service.PedidoService;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,23 +25,24 @@ public class PedidoController {
   }
 
   @PostMapping
+  @Transactional
   public void criarPedido(@RequestBody @Valid DataPedido dataPedido) {
     System.out.println("dados: "+ dataPedido);
-    pedidoService.criarPedido(new Pedido(dataPedido));
-//    pedidoService.criarPedido(dataPedido);
+    pedidoService.criarPedido(dataPedido);
+//    pedidoService.criarPedido(new Pedido(dataPedido));
   }
 
-  @GetMapping
+  @GetMapping // funciona
   public List<Pedido> listarPedidos() {
     return pedidoService.listPedidos();
   }
 
-  @GetMapping("/{id}")
+  @GetMapping("/{id}") // funciona
   public Optional<Pedido> obterPedido(@PathVariable Long id) {
     return pedidoService.getPedidoById(id);
   }
 
-  @PutMapping("/{id}")
+  @PatchMapping("/{id}")
   public Pedido atualizarPedido(@PathVariable Long id, @RequestBody Pedido pedidoAtualizado) {
     return pedidoService.updatePedido(id, pedidoAtualizado);
   }

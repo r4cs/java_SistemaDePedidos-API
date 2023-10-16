@@ -1,29 +1,24 @@
 package br.com.dbe.cp2.model.entity.itemPedido;
 
 import br.com.dbe.cp2.model.entity.pedido.Pedido;
-import jakarta.validation.constraints.NotEmpty;
+import br.com.dbe.cp2.model.entity.produto.Produto;
 import jakarta.validation.constraints.NotNull;
+
 public record DataItemPedido(
 //        @NotNull
         Long id,
-        @NotEmpty
-        String nome,
-        @NotEmpty
-        Double preco,
-        @NotEmpty
-        Integer estoque,
-        @NotEmpty
-        Integer qtde,
-        Pedido pedido
+        @NotNull
+        Pedido pedido,
+        @NotNull
+        Produto produto,
+        Integer qtde
 ) {
         public DataItemPedido(ItemPedido itemPedido) {
                 this(
                         itemPedido.getId(),
-                        itemPedido.getNome(),
-                        itemPedido.getPreco(),
-                        itemPedido.getEstoque(),
-                        itemPedido.getQtde(),
-                        itemPedido.getPedido()
+                        itemPedido.getPedido(),
+                        itemPedido.getProduto(),
+                        itemPedido.getQtde()
                 );
         }
 }

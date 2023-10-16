@@ -1,5 +1,6 @@
 package br.com.dbe.cp2.service;
 
+import br.com.dbe.cp2.model.entity.pedido.DataPedido;
 import br.com.dbe.cp2.model.entity.pedido.Pedido;
 import br.com.dbe.cp2.model.repository.PedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +18,12 @@ public class PedidoService {
         this.pedidoRepository = pedidoRepository;
     }
 
-    public Pedido criarPedido(Pedido pedido) {
+    public Pedido criarPedido(DataPedido dataPedido) {
+        Pedido pedido = new Pedido(dataPedido);
+//        pedido.getProdutos().forEach(itemPedido -> itemPedido.setPedido(pedido)); // Estabeleça a relação
         return pedidoRepository.save(pedido);
     }
+
 
     public List<Pedido> listPedidos() {
         // paginacao entra aqui!!
@@ -36,7 +40,6 @@ public class PedidoService {
 
         if (prev_pedido.isPresent()) {
             Pedido pedido = prev_pedido.get();
-            pedido.setProdutos(updatedPedido.getProdutos());
             pedido.setDate_time(updatedPedido.getDate_time());
 
             Pedido updatedRepositoryPedido = pedidoRepository.save(pedido);

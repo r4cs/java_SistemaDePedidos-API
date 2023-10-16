@@ -7,17 +7,19 @@ import jakarta.persistence.*;
 public class Produto {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "produto_id_seq")
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "produto_seq")
     private Long id;
 
-    private Long estoque;
-
     private String nome;
+    private Long estoque;
+    private Double preco;
+
 
     public Produto(DataProduto dataProduto) {
         this.id = dataProduto.id();
         this.estoque = dataProduto.estoque();
         this.nome = dataProduto.nome();
+        this.preco = dataProduto.preco();
     }
 
     public Produto() {
@@ -47,12 +49,21 @@ public class Produto {
         this.nome = nome;
     }
 
+    public Double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(Double preco) {
+        this.preco = preco;
+    }
+
     @Override
     public String toString() {
         return "Produto{" +
                 "id=" + id +
-                ", stock=" + estoque +
                 ", nome='" + nome + '\'' +
+                ", estoque=" + estoque +
+                ", preco=" + preco +
                 '}';
     }
 }

@@ -1,6 +1,5 @@
 package br.com.dbe.cp2.model.repository;
 
-import br.com.dbe.cp2.model.entity.pedido.DataPedido;
 import br.com.dbe.cp2.model.entity.pedido.Pedido;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
