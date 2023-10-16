@@ -18,10 +18,6 @@ public class Produto {
     private Long estoque;
     private Double preco;
 
-    @OneToMany(mappedBy = "produto", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-//    @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
-    private List<ItemPedido> itensPedido = new ArrayList<>();
-
 
     public Produto(DataProduto dataProduto) {
         this.id = dataProduto.id();
@@ -45,8 +41,8 @@ public class Produto {
         return estoque;
     }
 
-    public void setEstoque(Long stock) {
-        this.estoque = stock;
+    public void setEstoque(Long estoque) {
+        this.estoque = estoque;
     }
 
     public String getNome() {

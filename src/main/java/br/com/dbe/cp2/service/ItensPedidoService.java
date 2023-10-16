@@ -2,7 +2,11 @@ package br.com.dbe.cp2.service;
 
 import br.com.dbe.cp2.model.entity.itemPedido.DataItemPedido;
 import br.com.dbe.cp2.model.entity.itemPedido.ItemPedido;
+import br.com.dbe.cp2.model.entity.pedido.Pedido;
+import br.com.dbe.cp2.model.entity.produto.Produto;
 import br.com.dbe.cp2.model.repository.ItensPedidosRepository;
+import br.com.dbe.cp2.model.repository.PedidoRepository;
+import br.com.dbe.cp2.model.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,18 +17,36 @@ import java.util.Optional;
 public class ItensPedidoService {
 
     private ItensPedidosRepository itensPedidosRepository;
-
+    private ProdutoRepository produtoRepository;
+    private PedidoRepository pedidoRepository;
     public ItensPedidoService(ItensPedidosRepository itensPedidosRepository) {
         this.itensPedidosRepository = itensPedidosRepository;
     }
 
-    public void ItemPedidoService(@Autowired ItensPedidosRepository itensPedidosRepository) {
+    @Autowired
+    public ItensPedidoService(
+            ItensPedidosRepository itensPedidosRepository,
+            ProdutoRepository produtoRepository,
+            PedidoRepository pedidoRepository) {
         this.itensPedidosRepository = itensPedidosRepository;
+        this.produtoRepository = produtoRepository;
+        this.pedidoRepository = pedidoRepository;
     }
 
-    public ItemPedido criarItemPedido(DataItemPedido dataItemPedido) {
-        ItemPedido itemPedido = new ItemPedido(dataItemPedido);
-        return itensPedidosRepository.save(itemPedido);
+    public void criarItemPedido(DataItemPedido dataItemPedido) {
+        Pedido pedido = pedidoRepository.getReferenceById(dataItemPedido.pedido().getId());
+        System.out.println("pedido: " + pedido);
+        Produto produto = produtoRepository.getReferenceById(dataItemPedido.produto().getId());
+        System.out.println("produto: " + produto);
+
+        ItemPedido itemPedido = new ItemPedido();
+        itemPedido.setPedido(pedido);
+        itemPedido.setProduto(produto);
+        itemPedido.setQtde(dataItemPedido.qtde());
+
+
+        itensPedidosRepository.save(itemPedido);
+        System.out.println("Item pedido: " + itemPedido);
     }
 
     public List<ItemPedido> listarItensPedidos() {

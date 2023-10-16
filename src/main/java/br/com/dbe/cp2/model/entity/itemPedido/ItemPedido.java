@@ -10,7 +10,8 @@ import jakarta.validation.constraints.NotNull;
 @Table(name="item_pedido")
 public class ItemPedido {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "item_pedido_seq")
+    @GeneratedValue(strategy = GenerationType.IDENTITY,
+                                generator = "item_pedido_seq")
     private Long id;
 
     @ManyToOne

@@ -51,6 +51,15 @@ public class Pedido {
         this.date_time = dateTime;
     }
 
+    @OneToMany(mappedBy = "pedido", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    public List<ItemPedido> getItensPedido() {
+        return itensPedido;
+    }
+
+    public void setItensPedido(List<ItemPedido> itensPedido) {
+        this.itensPedido = itensPedido;
+    }
+
     @Override
     public String toString() {
         return "Pedido{" +

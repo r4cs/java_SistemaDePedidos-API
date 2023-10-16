@@ -20,7 +20,7 @@ public class PedidoService {
 
     public Pedido criarPedido(DataPedido dataPedido) {
         Pedido pedido = new Pedido(dataPedido);
-//        pedido.getProdutos().forEach(itemPedido -> itemPedido.setPedido(pedido)); // Estabeleça a relação
+        pedido.getItensPedido().forEach(itemPedido -> itemPedido.setPedido(pedido)); // Estabeleça a relação
         return pedidoRepository.save(pedido);
     }
 

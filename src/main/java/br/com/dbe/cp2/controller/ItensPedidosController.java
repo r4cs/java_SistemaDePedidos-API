@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping("/itens-pedidos")
 public class ItensPedidosController {
 
-    private ItensPedidoService itensPedidoService;
+    private final ItensPedidoService itensPedidoService;
 
     @Autowired
     public ItensPedidosController(ItensPedidoService itensPedidoService) {
