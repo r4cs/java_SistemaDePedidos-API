@@ -14,11 +14,15 @@ public class ItemPedido {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name="produto_id")
+    @JoinColumn(name="produto_id",
+//                referencedColumnName = "produto",
+                foreignKey = @ForeignKey(name="FK_PRODUTO_ID"))
     private Produto produto;
 
     @ManyToOne
-    @JoinColumn(name="pedido_id")
+    @JoinColumn(name="pedido_id",
+//                referencedColumnName = "pedido",
+                foreignKey = @ForeignKey(name="FK_PEDIDO_ID"))
     private Pedido pedido;
 
     private Integer qtde;

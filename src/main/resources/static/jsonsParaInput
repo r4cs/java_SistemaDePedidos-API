@@ -1,0 +1,38 @@
+//produtos
+{
+  "nome": "Caneta",
+  "estoque": 100,
+  "preco": 19.99
+}
+
+{
+"nome": "Borracha",
+"estoque": 200,
+"preco": 9.99
+}
+
+{
+"nome": "Caderno",
+"estoque": 150,
+"preco": 39.99
+}
+
+
+// Pedidos
+{
+  "dateTime": "2023-10-15T14:30:00",
+  "itensPedido": [
+    {
+      "produto": {
+        "id": 1
+      },
+      "quantidade": 3
+    },
+    {
+      "produto": {
+        "id": 2
+      },
+      "quantidade": 2
+    }
+  ]
+}

@@ -1,6 +1,10 @@
 package br.com.dbe.cp2.model.entity.produto;
 
+import br.com.dbe.cp2.model.entity.itemPedido.ItemPedido;
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name="produto")
 @Table(name="produto")
@@ -13,6 +17,10 @@ public class Produto {
     private String nome;
     private Long estoque;
     private Double preco;
+
+    @OneToMany(mappedBy = "produto", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+//    @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
+    private List<ItemPedido> itensPedido = new ArrayList<>();
 
 
     public Produto(DataProduto dataProduto) {

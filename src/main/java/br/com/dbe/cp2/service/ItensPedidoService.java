@@ -1,9 +1,13 @@
 package br.com.dbe.cp2.service;
 
+import br.com.dbe.cp2.model.entity.itemPedido.DataItemPedido;
 import br.com.dbe.cp2.model.entity.itemPedido.ItemPedido;
 import br.com.dbe.cp2.model.repository.ItensPedidosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ItensPedidoService {
@@ -18,14 +22,17 @@ public class ItensPedidoService {
         this.itensPedidosRepository = itensPedidosRepository;
     }
 
-    public ItemPedido criarItemPedido(ItemPedido itemPedido) {
-        // Save the itemPedido to the database
-        ItemPedido savedItemPedido = itensPedidosRepository.save(itemPedido);
+    public ItemPedido criarItemPedido(DataItemPedido dataItemPedido) {
+        ItemPedido itemPedido = new ItemPedido(dataItemPedido);
+        return itensPedidosRepository.save(itemPedido);
+    }
 
-        // Update the stock of the product in the order
-        atualizarEstoque(itemPedido);
+    public List<ItemPedido> listarItensPedidos() {
+        return itensPedidosRepository.findAll();
+    }
 
-        return savedItemPedido;
+    public Optional<ItemPedido> getItemPedidoById(Long id) {
+        return itensPedidosRepository.findById(id);
     }
 
     // Method to update the stock of the product in the order
@@ -40,6 +47,10 @@ public class ItensPedidoService {
 //             product.setEstoque(newStock);
 //             productRepository.save(product);
 //         }
+    }
+
+    public void deleteItemPedido(Long id) {
+        itensPedidosRepository.deleteById(id);
     }
 }
 
